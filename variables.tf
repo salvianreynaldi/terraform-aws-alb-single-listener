@@ -1,6 +1,5 @@
 variable "lb_name" {
-  default     = ""
-  description = "the name of the LB, will override the default <service_name>-<lb_type>-<random_string> name"
+  description = "the name of the LB"
 }
 
 variable "lb_logs_s3_bucket_name" {
@@ -64,8 +63,7 @@ variable "tg_stickiness" {
 }
 
 variable "tg_name" {
-  default     = ""
-  description = "the default target group's name, will override the default <service_name>-default name"
+  description = "the default target group's name"
 }
 
 variable "tg_port" {

@@ -22,7 +22,7 @@ resource "aws_route53_record" "main" {
 }
 
 resource "aws_lb" "main" {
-  name     = "${local.lb_name}"
+  name     = "${var`.lb_name}"
   internal = "${var.lb_internal}"
 
   security_groups = ["${var.lb_security_groups}"]
@@ -33,12 +33,12 @@ resource "aws_lb" "main" {
 
   access_logs {
     bucket  = "${var.lb_logs_s3_bucket_name}"
-    prefix  = "${local.lb_name}"
+    prefix  = "${var.lb_name}"
     enabled = true
   }
 
   tags = "${merge(map(
-    "Name", local.lb_name,
+    "Name", var.lb_name,
     "Service", var.tag_service_name,
     "Environment", var.tag_environment,
     "Description", var.tag_description,
@@ -59,7 +59,7 @@ resource "aws_lb_listener" "main" {
 }
 
 resource "aws_lb_target_group" "default" {
-  name                 = "${local.tg_name}"
+  name                 = "${var.tg_name}"
   port                 = "${var.tg_port}"
   protocol             = "${var.tg_protocol}"
   vpc_id               = "${var.vpc_id}"
@@ -70,7 +70,7 @@ resource "aws_lb_target_group" "default" {
   stickiness = ["${var.tg_stickiness}"]
 
   tags = "${merge(map(
-    "Name", local.tg_name,
+    "Name", var.tg_name,
     "Service", var.tag_service_name,
     "Environment", var.tag_environment,
     "Description", var.tag_description,
