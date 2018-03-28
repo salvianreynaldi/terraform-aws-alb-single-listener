@@ -22,7 +22,7 @@ resource "aws_route53_record" "main" {
 }
 
 resource "aws_lb" "main" {
-  name     = "${var`.lb_name}"
+  name     = "${var.lb_name}"
   internal = "${var.lb_internal}"
 
   security_groups = ["${var.lb_security_groups}"]
