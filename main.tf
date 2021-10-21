@@ -42,7 +42,7 @@ resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_lb.main.arn
   port              = var.listener_port
   protocol          = var.listener_protocol
-  ssl_policy        = var.listener_ssl_policy
+  ssl_policy        = var.listener_protocol == "HTTPS" || var.listener_protocol == "TLS" ? var.listener_ssl_policy : null
   certificate_arn   = var.listener_certificate_arn
 
   default_action {
