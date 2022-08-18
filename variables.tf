@@ -85,6 +85,12 @@ variable "tg_deregistration_delay" {
   description = "The default target group's deregistration delay"
 }
 
+variable "tg_algorithm_type" {
+  type        = string
+  default     = "round_robin"
+  description = "Determines how the load balancer selects targets when routing requests. The value is round_robin or least_outstanding_requests."
+}
+
 variable "tg_tags" {
   type        = map(string)
   default     = {}

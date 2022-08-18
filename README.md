@@ -50,6 +50,7 @@ A terraform module which provisions a DNS record that points to an Application L
 | lb_tags | The additional LB tags that will be merged over the default tags. | `map` | `{}` | no |
 | tg_health_check | The default target group's health check configuration, will be merged over the default (see locals.tf). | `map` | `{}` | no |
 | tg_target_type | The type of target that you must specify when registering targets with this target group. | `string` | `instance` | no |
+| tg_algorithm_type | The type of algorithm to determines how the load balancer selects targets when routing requests. | `string` | `round_robin` | no |
 | tg_stickiness | The default target group's stickiness configuration. | `map` | `default = { "type" = "lb_cookie" "cookie_duration" = 1 "enabled" = true }` | no |
 | tg_name | The default target group's name, will override the default <service_name>-default name. | `string` | n/a | no |
 | tg_port | The default target group's port. | `string` | `5000` | no |

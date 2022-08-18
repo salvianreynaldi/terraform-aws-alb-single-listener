@@ -56,13 +56,14 @@ resource "aws_lb_listener" "main" {
 }
 
 resource "aws_lb_target_group" "init_active" {
-  name                 = local.tg_name
-  port                 = var.tg_port
-  protocol             = var.tg_protocol
-  protocol_version     = var.tg_protocol_version
-  vpc_id               = var.vpc_id
-  deregistration_delay = var.tg_deregistration_delay
-  target_type          = var.tg_target_type
+  name                          = local.tg_name
+  port                          = var.tg_port
+  protocol                      = var.tg_protocol
+  protocol_version              = var.tg_protocol_version
+  vpc_id                        = var.vpc_id
+  deregistration_delay          = var.tg_deregistration_delay
+  target_type                   = var.tg_target_type
+  load_balancing_algorithm_type = var.tg_algorithm_type
 
   dynamic "health_check" {
     for_each = [local.tg_health_check]
@@ -165,12 +166,13 @@ resource "aws_lb_listener_rule" "builtin" {
 }
 
 resource "aws_lb_target_group" "init_standby" {
-  name                 = local.tg_name_standby
-  port                 = var.tg_port
-  protocol             = var.tg_protocol
-  vpc_id               = var.vpc_id
-  deregistration_delay = var.tg_deregistration_delay
-  target_type          = var.tg_target_type
+  name                          = local.tg_name_standby
+  port                          = var.tg_port
+  protocol                      = var.tg_protocol
+  vpc_id                        = var.vpc_id
+  deregistration_delay          = var.tg_deregistration_delay
+  target_type                   = var.tg_target_type
+  load_balancing_algorithm_type = var.tg_algorithm_type
 
   dynamic "health_check" {
     for_each = [local.tg_health_check]
