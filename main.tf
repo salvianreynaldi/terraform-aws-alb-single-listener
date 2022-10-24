@@ -66,7 +66,6 @@ resource "aws_lb_listener" "main" {
 
   lifecycle {
     ignore_changes = [
-      default_action[0].target_group_arn,
       default_action[0].forward[0],
     ]
   }
@@ -193,7 +192,6 @@ resource "aws_lb_listener_rule" "builtin" {
   }
   lifecycle {
     ignore_changes = [
-      action[0].target_group_arn,
       action[0].forward[0],
     ]
   }
