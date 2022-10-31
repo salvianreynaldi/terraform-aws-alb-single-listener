@@ -46,28 +46,12 @@ resource "aws_lb_listener" "main" {
   certificate_arn   = var.listener_certificate_arn
 
   default_action {
+    target_group_arn = aws_lb_target_group.init_active.arn
     type             = "forward"
-    forward {
-      stickiness {
-        duration = 1
-        enabled  = false
-      }
-
-      target_group {
-        arn    = aws_lb_target_group.init_active.arn
-        weight = 100
-      }
-      target_group {
-        arn    = aws_lb_target_group.init_standby.arn
-        weight = 0
-      }
-    }
   }
 
   lifecycle {
-    ignore_changes = [
-      default_action[0].forward[0],
-    ]
+    ignore_changes = [default_action[0].target_group_arn]
   }
 }
 
@@ -147,21 +131,7 @@ resource "aws_lb_listener_rule" "builtin" {
 
   action {
     type             = "forward"
-    forward {
-      stickiness {
-        duration = 1
-        enabled  = false
-      }
-
-      target_group {
-        arn    = aws_lb_target_group.init_active.arn
-        weight = 100
-      }
-      target_group {
-        arn    = aws_lb_target_group.init_standby.arn
-        weight = 0
-      }
-    }
+    target_group_arn = aws_lb_target_group.init_active.arn
   }
 
   dynamic "condition" {
@@ -191,9 +161,7 @@ resource "aws_lb_listener_rule" "builtin" {
     }
   }
   lifecycle {
-    ignore_changes = [
-      action[0].forward[0],
-    ]
+    ignore_changes = [action[0].target_group_arn]
   }
 }
 
