@@ -76,6 +76,7 @@ resource "aws_lb_target_group" "init_active" {
   vpc_id                        = var.vpc_id
   deregistration_delay          = var.tg_deregistration_delay
   target_type                   = var.tg_target_type
+  slow_start                    = var.tg_slow_start
   load_balancing_algorithm_type = var.tg_algorithm_type
 
   dynamic "health_check" {
@@ -198,6 +199,7 @@ resource "aws_lb_target_group" "init_standby" {
   vpc_id                        = var.vpc_id
   deregistration_delay          = var.tg_deregistration_delay
   target_type                   = var.tg_target_type
+  slow_start                    = var.tg_slow_start
   load_balancing_algorithm_type = var.tg_algorithm_type
 
   dynamic "health_check" {

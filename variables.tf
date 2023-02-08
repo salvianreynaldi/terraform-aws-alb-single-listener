@@ -55,6 +55,12 @@ variable "tg_target_type" {
   description = "The type of target that you must specify when registering targets with this target group."
 }
 
+variable "tg_slow_start" {
+  type        = "string"
+  default     = 0
+  description = "Amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds."
+}
+
 variable "tg_name" {
   type        = string
   default     = ""
