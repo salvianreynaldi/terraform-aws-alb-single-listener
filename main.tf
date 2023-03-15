@@ -46,8 +46,8 @@ resource "aws_lb_listener" "main" {
   certificate_arn   = var.listener_certificate_arn
 
   default_action {
-    type             = "forward"
-    
+    type = "forward"
+
     forward {
       target_group {
         arn    = aws_lb_target_group.init_active.arn
@@ -144,7 +144,7 @@ resource "aws_lb_listener_rule" "builtin" {
   priority = each.key
 
   action {
-    type             = "forward"
+    type = "forward"
 
     forward {
       target_group {

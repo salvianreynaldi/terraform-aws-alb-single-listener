@@ -56,7 +56,7 @@ variable "tg_target_type" {
 }
 
 variable "tg_slow_start" {
-  type        = "string"
+  type        = number
   default     = 0
   description = "Amount time for targets to warm up before the load balancer sends them a full share of requests. The range is 30-900 seconds or 0 to disable. The default value is 0 seconds."
 }
