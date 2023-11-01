@@ -135,6 +135,11 @@ resource "aws_lb_listener_rule" "custom" {
       }
     }
   }
+  lifecycle {
+    ignore_changes = [
+      action[0],
+    ]
+  }
 }
 
 resource "aws_lb_listener_rule" "builtin" {
